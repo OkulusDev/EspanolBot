@@ -70,16 +70,16 @@ def add_words(message):
 			t = transcript_list.find_transcript(['es'])
 			text = clear_text('.'.join([i['text'] for i in t.fetch()]))
 
-			with open('translated/trans.txt', 'w') as file:
+			with open('trans.txt', 'w') as file:
 				logger.info(f'Сохранение транскрипции {message.text} в файл')
 				file.write(text)
 
-			with open("translated/trans.txt", 'rb') as file:
+			with open("trans.txt", 'rb') as file:
 				logger.info('Отправка файла с транскрипцией пользователю')
 				bot.send_document(message.chat.id, file)
 
 			logger.info(f'Удаление файла с транскрипцией {message.text}')
-			os.system('rm translated/trans.txt')
+			os.system('rm trans.txt')
 
 			db_helper.update_level(message.from_user.id, int(db_helper.get_user_level(message.from_user.id)[0][0]) + 1)
 			bot.send_message(message.chat.id, 'Ваш уровень владения языком повышен!')
