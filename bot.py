@@ -181,15 +181,22 @@ def set_level_to_user_end(message, user_id):
 
 def send_report(message):
 	# Функция отправки репорта разработчикам
-	user_id = message.from_user.id
-	time = datetime.now()
+	user_id = message.from_user.id 						# ID пользователя
+	time = datetime.now()								# текущее время
+	
+	with open(f'report_{user_id}_{time}.txt', 'w') as file:
+		file.write(message.text)
+
 	for admin in cfg.ADMINS_IDS:
+		# Отправляем репорт всем администраторам
 		bot.send_message(admin, f'''Здравствуйте, администратор {admin}!
 Пользователь под ID {user_id} прислал репорт:\n
 {message.text}''')
 		bot.send_message(message.chat.id, f'Репорт сохранен в файл "report_{user_id}_{time}.txt"')
-	with open(f'report_{user_id}_{time}.txt', 'w') as file:
-		file.write(message.text)
+
+		# Отправляем файл с репортом всем администраторам
+		with open(f'report_{user_id}_{time}.txt', 'r') as file:
+			bot.send_document(message.chat.id, file)
 
 
 @bot.message_handler(commands=['start'])
