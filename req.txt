@@ -1,0 +1,2 @@
+python-telegram-bot==20.2
+youtube-transcript-api==0.6.0
