@@ -7,6 +7,11 @@ import os
 
 
 def file_is_empty(path: str) -> bool:
+	"""Данная функция проверяет, пустой ли файл.
+	Аргументы:
+	 + path: str - путь до файла
+	Возвращает:
+	 + bool - True, если файл пустой, если не пустой, то False"""
 	return os.stat(path).st_size == 0
 
 
