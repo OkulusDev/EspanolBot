@@ -390,4 +390,6 @@ def launch_bot() -> None:
 
 if __name__ == '__main__':
 	# Если файл исполняемый, то запускаем метод launch_bot, который стартует бота
+	print('[+] Запускаем бота')
+	print('Бот создан @OkulusDev, больше на @OkulusHub_public')
 	launch_bot()
